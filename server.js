@@ -6,7 +6,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
 
@@ -23,7 +25,13 @@ app.get('/api/notes', (req, res) => {
 });
 
 
+app.post('/api/notes', (req, res) => {
+    req.body.id = uniqid();
+    const newNote = req.body;
 
+    writeDatabase(newNote);
+    console.log(`Added note with id ${req.body.id}`);
+});
 
 
 const writeDatabase = (data) => {
