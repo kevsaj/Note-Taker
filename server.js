@@ -1,4 +1,5 @@
 const express = require('express');
+const uniqid = require('uniqid');
 const fs = require('fs');
 const path = require('path');
 
@@ -21,11 +22,16 @@ app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/db/db.json'));
 });
 
-function writeDatabase(data) {
+
+
+
+
+const writeDatabase = (data) => {
     fs.writeFile(__dirname + '/db/db.json', JSON.stringify(data), err => {
         if (err) throw err;
     });
 }
+
 
 app.listen(PORT, () => {
     console.log(`App now listening at localhost:${PORT}`);
