@@ -8,7 +8,7 @@ This is my README for Assignment 10
 * [Credits](#Credits)
 * [License](#License)
 
-Page is live: [Video]( )
+Page is live: [on Heroku](https://note-taker-kev.herokuapp.com/)
 
 ![Should Look like this lol](/public/assets/img/11-express-homework-demo-01.png)
 # Installation
