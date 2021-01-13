@@ -28,12 +28,23 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
     req.body.id = uniqid();
     const newNote = req.body;
+    
+    fs.readFile(path.join(__dirname + '/db/db.json'), (err, data) => {
+        
+        let oldNotes;
+        try {
+            oldNotes = JSON.parse(data);
+        } catch {
+            oldNotes = [];
+        }
+        oldNotes.push(newNote);
+        writeDatabase(oldNotes);
+        console.log(`Added note with id ${req.body.id}`);
+        res.send(`Added note with id ${req.body.id}`);
+    
+    });
 
-    writeDatabase(newNote);
-    res.json(newNote);
-    console.log(`Added note with id ${req.body.id}`);
 });
-
 
 const writeDatabase = (data) => {
     fs.writeFile(__dirname + '/db/db.json', JSON.stringify(data), err => {
