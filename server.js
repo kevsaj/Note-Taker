@@ -30,6 +30,7 @@ app.post('/api/notes', (req, res) => {
     const newNote = req.body;
 
     writeDatabase(newNote);
+    res.json(newNote);
     console.log(`Added note with id ${req.body.id}`);
 });
 
